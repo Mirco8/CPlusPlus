@@ -1,6 +1,9 @@
 
 #include "Calc.hpp"
 #include <stdexcept>
+#include <string>
+#include <limits>
+#include <istream> 
 
 
 auto calc(int x, int y, char op) -> int {
@@ -18,4 +21,18 @@ auto calc(int x, int y, char op) -> int {
         default:
             throw std::invalid_argument{"unknown operator"};
     }
+}
+
+auto calc(std::istream& in) -> int {
+    int a{}, b{};
+    char op{};
+    if (!(in >> a >> op >> b)) {
+        throw std::invalid_argument{"invalid format"};
+    }
+    // Nur Whitespace danach erlaubt
+    in >> std::ws;
+    if (in.peek() != std::char_traits<char>::eof()) {
+        throw std::invalid_argument{"trailing characters"};
+    }
+    return calc(a, b, op);
 }
