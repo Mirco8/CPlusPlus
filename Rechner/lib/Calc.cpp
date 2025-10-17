@@ -29,7 +29,6 @@ auto calc(std::istream& in) -> int {
     if (!(in >> a >> op >> b)) {
         throw std::invalid_argument{"invalid format"};
     }
-    // Nur Whitespace danach erlaubt
     in >> std::ws;
     if (in.peek() != std::char_traits<char>::eof()) {
         throw std::invalid_argument{"trailing characters"};
