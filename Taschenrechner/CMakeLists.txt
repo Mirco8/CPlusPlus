@@ -1,38 +1,26 @@
-#[===[ LIBRARY ]===]
-
-add_library("${CPL_TARGET_WEEK_PREFIX}ex01_pocketcalculator"
-    "lib/Pocketcalculator.cpp"
+Include(FetchContent)
+ 
+FetchContent_Declare(
+  Catch2
+  GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+  GIT_TAG        v3.7.0
+  URL_HASH       "SHA256=75b04c94471a70680f10f5d0d985bd1a96b8941d040d6a7bfd43f6c6b1de9daf"
 )
-
-target_include_directories("${CPL_TARGET_WEEK_PREFIX}ex01_pocketcalculator" PUBLIC "lib")
-
-target_link_libraries("${CPL_TARGET_WEEK_PREFIX}ex01_pocketcalculator" PUBLIC
-    "w02_ex02_calc_lib"
-    "w03_ex01_seven_segment"
+ 
+FetchContent_MakeAvailable(Catch2)
+cmake_minimum_required(VERSION 3.19)
+ 
+project("PocketCalculator"
+    LANGUAGES CXX
 )
-
-
-#[===[ APPLICATION ]===]
-
-add_executable("${CPL_TARGET_WEEK_PREFIX}ex01_pocketcalculator_app"
-"app/PocketcalculatorApp.cpp"
-)
-
-target_link_libraries("${CPL_TARGET_WEEK_PREFIX}ex01_pocketcalculator_app" PRIVATE
-"${CPL_TARGET_WEEK_PREFIX}ex01_pocketcalculator"
-)
-
-
-#[===[ TESTS ]===]
-
-
-add_executable("${CPL_TARGET_WEEK_PREFIX}ex01_pocketcalculator_tests"
-    "tests/PocketcalculatorTests.cpp"
-)
-
-target_link_libraries("${CPL_TARGET_WEEK_PREFIX}ex01_pocketcalculator_tests" PRIVATE
-    "${CPL_TARGET_WEEK_PREFIX}ex01_pocketcalculator"
-    "Catch2::Catch2WithMain"
-)
-
-catch_discover_tests("${CPL_TARGET_WEEK_PREFIX}ex01_pocketcalculator_tests")
+ 
+set(CMAKE_CXX_STANDARD 20)
+ 
+add_library("PocketcalculatorLib" "lib/Pocketcalculator.cpp")
+target_include_directories("PocketcalculatorLib" PUBLIC "lib")
+ 
+add_executable("PocketcalculatorTest" "tests/PocketcalculatorTest.cpp")
+target_link_libraries("PocketcalculatorTest" PRIVATE "PocketcalculatorLib" "Catch2::Catch2WithMain")
+ 
+add_executable("PocketcalculatorApp" "app/PocketcalculatorApp.cpp")
+target_link_libraries("PocketcalculatorApp" PRIVATE "PocketcalculatorLib")
