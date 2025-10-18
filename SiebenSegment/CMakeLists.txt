@@ -1,33 +1,26 @@
-#[===[ LIBRARY ]===]
-
-add_library("${CPL_TARGET_WEEK_PREFIX}ex01_seven_segment"
-    "lib/Sevensegment.cpp"
+Include(FetchContent)
+ 
+FetchContent_Declare(
+  Catch2
+  GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+  GIT_TAG        v3.7.0
+  URL_HASH       "SHA256=75b04c94471a70680f10f5d0d985bd1a96b8941d040d6a7bfd43f6c6b1de9daf"
 )
-
-target_include_directories("${CPL_TARGET_WEEK_PREFIX}ex01_seven_segment" PUBLIC "lib")
-
-
-#[===[ APPLICATION ]===]
-
-add_executable("${CPL_TARGET_WEEK_PREFIX}ex01_seven_segment_app"
-"app/SevensegmentApp.cpp"
+ 
+FetchContent_MakeAvailable(Catch2)
+cmake_minimum_required(VERSION 3.19)
+ 
+project("sevenSegment"
+    LANGUAGES CXX
 )
-
-target_link_libraries("${CPL_TARGET_WEEK_PREFIX}ex01_seven_segment_app" PRIVATE
-"${CPL_TARGET_WEEK_PREFIX}ex01_seven_segment"
-)
-
-
-#[===[ TESTS ]===]
-
-
-add_executable("${CPL_TARGET_WEEK_PREFIX}ex01_seven_segment_tests"
-    "tests/SevensegmentTests.cpp"
-)
-
-target_link_libraries("${CPL_TARGET_WEEK_PREFIX}ex01_seven_segment_tests" PRIVATE
-    "${CPL_TARGET_WEEK_PREFIX}ex01_seven_segment"
-    "Catch2::Catch2WithMain"
-)
-
-catch_discover_tests("${CPL_TARGET_WEEK_PREFIX}ex01_seven_segment_tests")
+ 
+set(CMAKE_CXX_STANDARD 20)
+ 
+add_library("SevensegmentLib" "lib/Sevensegment.cpp")
+target_include_directories("SevensegmentLib" PUBLIC "lib")
+ 
+add_executable("SevensegmentTest" "tests/SevensegmentTest.cpp")
+target_link_libraries("SevensegmentTest" PRIVATE "SevensegmentLib" "Catch2::Catch2WithMain")
+ 
+add_executable("SevensegmentApp" "app/SevensegmentApp.cpp")
+target_link_libraries("SevensegmentApp" PRIVATE "SevensegmentLib")
