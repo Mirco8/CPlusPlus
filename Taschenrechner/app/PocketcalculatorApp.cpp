@@ -2,6 +2,7 @@
 
 #include <iostream>
 
-auto main() -> int {
+auto main() -> int
+{
     pocketcalculator(std::cin, std::cout);
 }
