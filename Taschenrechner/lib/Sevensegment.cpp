@@ -110,8 +110,6 @@ auto printLargeError(std::ostream &out) -> void
         for (std::size_t i = 0; i < word.size(); ++i)
         {
             out << (*word[i])[static_cast<std::size_t>(row)];
-            if (i + 1 < word.size())
-                out << ' ';
         }
         out << '\n';
     }
