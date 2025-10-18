@@ -63,7 +63,7 @@ std::array<std::array<std::string, 5>, 10> const digits{
 
 static const std::array<std::string, 5> glyph_E{" - ", "|  ", " - ", "|  ", " - "};
 static const std::array<std::string, 5> glyph_r{"   ", "|  ", " - ", "|  ", "   "};
-static const std::array<std::string, 5> glyph_o{"   ", "| |", " - ", "| |", "   "};
+static const std::array<std::string, 5> glyph_o{"   ", "   ", " - ", "| |", " - "};
 
 auto printLargeDigit(int digit, std::ostream &output) -> void
 {
@@ -95,8 +95,6 @@ auto printLargeNumber(int i, std::ostream &output) -> void
         {
             const auto &glyph = glyphFor(text[col]);
             output << glyph[static_cast<std::size_t>(row)];
-            if (col + 1 < text.size())
-                output << ' ';
         }
         output << '\n';
     }
