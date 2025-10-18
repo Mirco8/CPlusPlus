@@ -61,6 +61,10 @@ std::array<std::array<std::string, 5>, 10> const digits{
          " - "},
     }};
 
+static const std::array<std::string, 5> glyph_E{" - ", "|  ", " - ", "|  ", " - "};
+static const std::array<std::string, 5> glyph_r{"   ", "|  ", " - ", "|  ", "   "};
+static const std::array<std::string, 5> glyph_o{"   ", "| |", " - ", "| |", "   "};
+
 auto printLargeDigit(int digit, std::ostream &output) -> void
 {
     if (digit < 0 || digit > 9)
@@ -95,5 +99,22 @@ auto printLargeNumber(int i, std::ostream &output) -> void
                 output << ' ';
         }
         output << '\n';
+    }
+}
+
+auto printLargeError(std::ostream &out) -> void
+{
+    const std::array<const std::array<std::string, 5> *, 5> word{
+        &glyph_E, &glyph_r, &glyph_r, &glyph_o, &glyph_r};
+
+    for (int row = 0; row < 5; ++row)
+    {
+        for (std::size_t i = 0; i < word.size(); ++i)
+        {
+            out << (*word[i])[static_cast<std::size_t>(row)];
+            if (i + 1 < word.size())
+                out << ' ';
+        }
+        out << '\n';
     }
 }

@@ -16,7 +16,11 @@ project("PocketCalculator"
  
 set(CMAKE_CXX_STANDARD 20)
  
-add_library("PocketcalculatorLib" "lib/Pocketcalculator.cpp")
+add_library(PocketcalculatorLib
+  lib/Calc.cpp
+  lib/Sevensegment.cpp
+  lib/Pocketcalculator.cpp
+)
 target_include_directories("PocketcalculatorLib" PUBLIC "lib")
  
 add_executable("PocketcalculatorTest" "tests/PocketcalculatorTest.cpp")
