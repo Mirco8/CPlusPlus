@@ -3,6 +3,6 @@
 
 #include <iosfwd>
 
-auto pocketcalculator(std::istream& input, std::ostream& output) -> void;
+auto pocketcalculator(std::istream &input, std::ostream &output) -> void;
 
 #endif
