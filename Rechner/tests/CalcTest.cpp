@@ -4,9 +4,10 @@
 
 #include <cstdlib>
 
-//TODO: Add more tests
+// TODO: Add more tests
 
-TEST_CASE("testOnePlusOne") {
+TEST_CASE("testOnePlusOne")
+{
   auto result = calc(1, 1, '+');
   REQUIRE(result == 2);
 }

@@ -2,6 +2,7 @@
 
 #include <iostream>
 
-auto main() -> int {
+auto main() -> int
+{
     printLargeDigit(1, std::cout);
 }

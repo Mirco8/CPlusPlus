@@ -4,6 +4,6 @@
 #include <iosfwd>
 
 auto calc(int, int, char) -> int;
-auto calc(std::istream& in) -> int;
+auto calc(std::istream &in) -> int;
 
 #endif
