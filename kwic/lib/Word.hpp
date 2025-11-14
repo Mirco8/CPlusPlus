@@ -4,6 +4,9 @@
 #include <iosfwd>
 #include <string>
 
+namespace text 
+{
+
 class Word {
 public:
   Word();
@@ -29,5 +32,7 @@ private:
 
 std::ostream& operator<<(std::ostream& out, Word const& word);
 std::istream& operator>>(std::istream& in, Word& word);
+
+}
 
 #endif

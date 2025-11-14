@@ -1,5 +1,5 @@
-#include "Kwic.hpp"
-#include "Word.hpp"
+#include "kwic.hpp"
+#include "word.hpp"
 
 #include <algorithm>
 #include <iostream>
@@ -16,7 +16,6 @@ namespace text
 
     void kwic(std::istream &in, std::ostream &out)
     {
-        // Use a set to automatically sort and eliminate duplicates
         auto comparator = [](Line const &lhs, Line const &rhs)
         {
             return std::lexicographical_compare(
@@ -26,16 +25,14 @@ namespace text
 
         std::set<Line, decltype(comparator)> allRotations(comparator);
 
-        // Read all lines from input
         std::string inputLine;
         while (std::getline(in, inputLine))
         {
             if (inputLine.empty())
             {
-                continue; // Skip empty lines
+                continue; 
             }
 
-            // Parse words from the line
             Line words;
             std::istringstream lineStream(inputLine);
             Word w;
@@ -46,10 +43,9 @@ namespace text
 
             if (words.empty())
             {
-                continue; // Skip lines with no valid words
+                continue; 
             }
 
-            // Generate all rotations of this line
             for (size_t i = 0; i < words.size(); ++i)
             {
                 Line rotation = words;
@@ -58,21 +54,14 @@ namespace text
             }
         }
 
-        // Output all rotations in sorted order
         for (auto const &line : allRotations)
         {
-            auto it = line.begin();
-            if (it != line.end())
+            for (auto const &w : line)
             {
-                out << *it;
-                ++it;
-            }
-            for (; it != line.end(); ++it)
-            {
-                out << ' ' << *it;
+                out << w << ' ';   
             }
             out << '\n';
         }
-    }
+            }
 
-}
+        }

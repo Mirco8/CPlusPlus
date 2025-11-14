@@ -1,5 +1,5 @@
-#include "Kwic.hpp"
-#include "Word.hpp"
+#include "kwic.hpp"
+#include "word.hpp"
 
 #include <catch2/catch_test_macros.hpp>
 #include <cstdlib>
@@ -305,7 +305,6 @@ TEST_CASE("kwic_case_insensitive_sorting")
 
   text::kwic(input, output);
 
-  // Both rotations should be treated as duplicates due to case-insensitive comparison
   std::string expected =
       "Apple banana\n"
       "banana Apple\n";
@@ -320,7 +319,6 @@ TEST_CASE("kwic_ignores_punctuation")
 
   text::kwic(input, output);
 
-  // Punctuation should be ignored, words extracted
   std::string expected =
       "hello world\n"
       "world hello\n";
@@ -335,7 +333,6 @@ TEST_CASE("kwic_duplicate_lines")
 
   text::kwic(input, output);
 
-  // Duplicates should be eliminated
   std::string expected =
       "line same\n"
       "same line\n";

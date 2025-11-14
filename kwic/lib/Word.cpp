@@ -1,11 +1,14 @@
 
-#include "Word.hpp"
+#include "word.hpp"
 
 #include <algorithm>
 #include <cctype>
 #include <istream>
 #include <ostream>
 #include <stdexcept>
+
+namespace text 
+{
 
 Word::Word() : value{"default"} {}
 
@@ -71,11 +74,11 @@ int Word::compareCaseInsensitive(std::string const& lhs, std::string const& rhs)
   }
   
   if (lhsIt == lhs.end() && rhsIt == rhs.end()) {
-    return 0; // Equal
+    return 0; 
   } else if (lhsIt == lhs.end()) {
-    return -1; // lhs is shorter
+    return -1; 
   } else {
-    return 1; // rhs is shorter
+    return 1;
   }
 }
 
@@ -111,4 +114,6 @@ std::ostream& operator<<(std::ostream& out, Word const& word) {
 std::istream& operator>>(std::istream& in, Word& word) {
   word.read(in);
   return in;
+}
+
 }
